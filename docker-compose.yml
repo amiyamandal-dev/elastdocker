@@ -33,7 +33,7 @@ services:
       args:
         ELK_VERSION: ${ELK_VERSION}
     restart: unless-stopped
-    link:
+    links:
       - kibana
       - elasticsearch
     environment:
@@ -76,7 +76,7 @@ services:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
-    link:
+    links:
       - kibana
       - elasticsearch
     restart: unless-stopped
@@ -102,7 +102,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
-    link:
+    links:
       - logstash
       - elasticsearch
     environment:
