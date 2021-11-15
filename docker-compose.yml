@@ -26,6 +26,7 @@ secrets:
 
 services:
   elasticsearch:
+    user: root
     image: elasticsearch:elastdocker-${ELK_VERSION}
     build:
       context: elasticsearch/
@@ -67,6 +68,7 @@ services:
 
   logstash:
     image: logstash:elastdocker-${ELK_VERSION}
+    user: root
     build:
       context: logstash/
       args:
@@ -87,6 +89,7 @@ services:
 
   kibana:
     image: kibana:elastdocker-${ELK_VERSION}
+    user: root
     build:
       context: kibana/
       args:
