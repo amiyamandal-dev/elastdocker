@@ -25,7 +25,7 @@ secrets:
     file: ./secrets/certs/kibana/kibana.key
 
 services:
-  elasticsearch:
+  elasticsearch01:
     user: root
     image: elasticsearch:elastdocker-${ELK_VERSION}
     container_name: elasticsearch01
@@ -34,9 +34,6 @@ services:
       args:
         ELK_VERSION: ${ELK_VERSION}
     restart: unless-stopped
-    links:
-      - kibana01
-      - elasticsearch01
     environment:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
@@ -70,7 +67,7 @@ services:
         soft: 200000
         hard: 200000
 
-  logstash:
+  logstash01:
     image: logstash:elastdocker-${ELK_VERSION}
     container_name: logstash01
     user: root
@@ -79,7 +76,6 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     links:
-      - kibana01
       - elasticsearch01
     restart: unless-stopped
     volumes:
@@ -95,7 +91,7 @@ services:
       - "5044:5044"
       - "9600:9600"
 
-  kibana:
+  kibana01:
     image: kibana:elastdocker-${ELK_VERSION}
     container_name: kibana01
     build:
