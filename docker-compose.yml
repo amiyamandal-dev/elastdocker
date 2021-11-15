@@ -33,6 +33,9 @@ services:
       args:
         ELK_VERSION: ${ELK_VERSION}
     restart: unless-stopped
+    link:
+      - kibana
+      - elasticsearch
     environment:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
@@ -73,6 +76,9 @@ services:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
+    link:
+      - kibana
+      - elasticsearch
     restart: unless-stopped
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
@@ -96,6 +102,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
+    link:
+      - logstash
+      - elasticsearch
     environment:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
