@@ -89,7 +89,6 @@ services:
 
   kibana:
     image: kibana:elastdocker-${ELK_VERSION}
-    user: root
     build:
       context: kibana/
       args:
