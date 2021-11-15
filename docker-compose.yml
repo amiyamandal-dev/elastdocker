@@ -107,7 +107,7 @@ services:
     environment:
       ELASTIC_USERNAME: ${ELASTIC_USERNAME}
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-      ELASTICSEARCH_HOST_PORT: ${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+      ELASTICSEARCH_HOST_PORT: "apsrd01339:9200"
     secrets:
       - source: elastic.ca
         target: /certs/ca.crt
